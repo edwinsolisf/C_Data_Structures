@@ -1,0 +1,8 @@
+*.cpp
+main
+test
+*.o
+*.a
+.vscode/
+main.c
+ 
