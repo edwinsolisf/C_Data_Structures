@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-typedef struct
+typedef struct data_matrix_st
 {
     size_t rows_;
     size_t columns_;
@@ -11,7 +11,7 @@ typedef struct
     void* data_;
 } matrix_t;
 
-matrix_t create_matrix(size_t element_size, size_t rows, size_t columns);
+matrix_t create_matrix(size_t element_size, size_t rows, size_t columns, const void* data);
 void destroy_matrix(matrix_t* matrix);
 
 void resize_matrix(matrix_t* matrix, size_t rows, size_t columns);
@@ -20,7 +20,7 @@ void reuse_matrix(matrix_t* matrix, size_t element_size, size_t rows, size_t col
 void set_element_matrix(matrix_t* matrix, size_t row, size_t column, const void* data);
 void* get_element_matrix(const matrix_t* matrix, size_t row, size_t column);
 
-matrix_t create_int_matrix(size_t rows, size_t columns);
+matrix_t create_int_matrix(size_t rows, size_t columns, const int* data);
 void set_int_matrix(matrix_t* matrix, size_t row, size_t column, int data);
 int get_int_matrix(const matrix_t* matrix, size_t row, size_t column);
 

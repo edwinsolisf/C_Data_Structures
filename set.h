@@ -5,7 +5,7 @@
 
 typedef int(*LESS_THAN_FUNC)(const void* left, const void* right);
 
-typedef struct
+typedef struct data_ordered_set_st
 {
     size_t size_;
     size_t capacity_;

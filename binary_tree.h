@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-typedef struct
+typedef struct data_binary_tree_st
 {
     void* data_;
     long* meta_data_;

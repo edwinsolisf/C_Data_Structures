@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-typedef struct
+typedef struct data_array_graph_st
 {
     size_t total_nodes_;
     size_t total_edges_;

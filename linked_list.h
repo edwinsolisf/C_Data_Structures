@@ -12,7 +12,7 @@ struct linked_list_node
 }
 */
 
-typedef struct
+typedef struct data_linked_list_st
 {
     size_t element_size_;
     size_t size_;

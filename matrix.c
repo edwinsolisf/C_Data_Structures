@@ -2,7 +2,7 @@
 
 #include <string.h>
 
-matrix_t create_matrix(size_t element_size, size_t rows, size_t columns)
+matrix_t create_matrix(size_t element_size, size_t rows, size_t columns, const void* data)
 {
     matrix_t out;
 
@@ -10,6 +10,8 @@ matrix_t create_matrix(size_t element_size, size_t rows, size_t columns)
     out.rows_ = rows;
     out.columns_ = columns;
     out.data_ = malloc(element_size * rows *  columns);
+    if (data != NULL)
+        memcpy(out.data_, data, element_size * rows * columns);
 
     return out;
 }
@@ -44,9 +46,9 @@ void* get_element_matrix(const matrix_t* matrix, size_t row, size_t column)
     return matrix->data_ + matrix->element_size_ * (matrix->columns_ * row + column);
 }
 
-matrix_t create_int_matrix(size_t rows, size_t columns)
+matrix_t create_int_matrix(size_t rows, size_t columns, const int* data)
 {
-    return create_matrix(sizeof(int), rows, columns);
+    return create_matrix(sizeof(int), rows, columns, data);
 }
 
 void set_int_matrix(matrix_t* matrix, size_t row, size_t column, int data)
