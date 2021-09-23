@@ -111,14 +111,14 @@ void set_llist_node_data(linked_list_node node, size_t element_size, const void*
 
 linked_list_node get_llist_node_next(const linked_list_node node)
 {
-    return (linked_list_node)(uintptr_t)node;
+    return (linked_list_node)(*(uintptr_t*)node);
 }
 
 void set_llist_node_next(linked_list_node node, const linked_list_node next)
 {
     if (node == NULL)
         return;
-    memcpy(get_llist_node_next(node), &next, sizeof(void*));
+    memcpy(node, &next, sizeof(void*));
 }
 
 void* get_element_linked_list(const linked_list* list, int node)

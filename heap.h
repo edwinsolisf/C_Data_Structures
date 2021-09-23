@@ -6,12 +6,11 @@
 typedef int (*LESS_THAN_FUNC)(void* left, void* right);
 typedef int (*GREATER_THAN_FUNC)(void* left, void* right);
 
-typedef struct
+typedef struct data_heap_st
 {
     binary_tree tree_;
     LESS_THAN_FUNC order_func;
 } heap;
-
 
 heap create_heap(size_t initial_capacity, size_t element_size, LESS_THAN_FUNC less_than_func);
 heap copy_heap(const heap* heap_);
