@@ -43,7 +43,7 @@ void set_element_matrix(matrix_t* matrix, size_t row, size_t column, const void*
 
 void* get_element_matrix(const matrix_t* matrix, size_t row, size_t column)
 {
-    return matrix->data_ + matrix->element_size_ * (matrix->columns_ * row + column);
+    return matrix->data_ + matrix->element_size_ * ((matrix->columns_ * row) + column);
 }
 
 matrix_t create_int_matrix(size_t rows, size_t columns, const int* data)

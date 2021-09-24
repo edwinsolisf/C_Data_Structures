@@ -25,4 +25,5 @@ vector_t create_int_vector(size_t dimensions, const int* data);
 int get_int_vector(const vector_t* vector, size_t index);
 void set_int_vector(vector_t* vector, size_t index, int value);
 void fill_int_vector(vector_t* vector, int value);
+
 #endif /* DATA_VECTOR_H */
