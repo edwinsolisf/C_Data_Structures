@@ -36,13 +36,20 @@ void resize_vector(vector_t* vector, size_t dimensions)
 void reuse_vector(vector_t* vector, size_t dimensions, size_t element_size, const void* data)
 {
     if (dimensions * element_size > vector->dimensions_ * vector->element_size_)
-    {
         vector->data_ = realloc(vector->data_, dimensions * element_size);
-    }
+    vector->element_size_ = element_size;
+    vector->dimensions_ = dimensions;
+   
     if (data != NULL)
         memcpy(vector->data_, data, element_size * dimensions);
-    vector->dimensions_ = dimensions;
-    vector->element_size_ = element_size;
+}
+
+void swap_vector(vector_t* left, vector_t* right)
+{
+    vector_t temp = *left;
+
+    *left = *right;
+    *right = temp;
 }
 
 void* get_element_vector(const vector_t* vector, size_t index)

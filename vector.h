@@ -15,6 +15,7 @@ void destroy_vector(vector_t* vector);
 
 void resize_vector(vector_t* vector, size_t dimensions);
 void reuse_vector(vector_t* vector, size_t dimensions, size_t element_size, const void* data);
+void swap_vector(vector_t* left, vector_t* right);
 
 void* get_element_vector(const vector_t* vector, size_t index);
 void set_element_vector(vector_t* vector, size_t index, const void* data);
