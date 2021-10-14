@@ -50,7 +50,7 @@ size_t next_capacity_ordered_set(size_t capacity)
     return capacity ? capacity * 2 : 2;
 }
 
-const void* get_element_ordered_set(const ordered_set_t* set, int index)
+const void* get_element_ordered_set(const ordered_set_t* set, size_t index)
 {
     if (index < set->size_ && index >= 0)
         return set->data_ + (index * set->element_size_);

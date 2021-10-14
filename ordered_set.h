@@ -85,7 +85,7 @@ size_t next_capacity_ordered_set(size_t capacity);
  * @param index the index of the element to be retrieved
  * @return const pointer to the data
  */
-const void* get_element_ordered_set(const ordered_set_t* set, int index);
+const void* get_element_ordered_set(const ordered_set_t* set, size_t index);
 
 /**
  * @brief Removes the given element from the ordered_set

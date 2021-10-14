@@ -47,11 +47,12 @@ const void* binary_search(const void* element, const void* array, size_t element
 
 int array_contains(const void* element, const void* array, size_t element_count, size_t element_size, EQUALS_FUNC equal_func)
 {
-    return linear_search(element, array, element_count, element_size, equal_func) == NULL ? 0 : 1;
+    return element_count != 0 ? (linear_search(element, array, element_count, element_size, equal_func) == NULL ? 0 : 1) : 0;
 }
 
 int sorted_array_contains(const void* element, const void* array, size_t element_count, size_t element_size, LESS_THAN_FUNC order_func)
 {
+    if (element_count == 0) return 0;
     const void* position = binary_search(element, array, element_count, element_size, order_func);
     if (!(order_func(position, element) || order_func(element, position)))
         return 1;
