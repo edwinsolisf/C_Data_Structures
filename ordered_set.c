@@ -3,7 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 
-ordered_set_t create_ordered_set(size_t element_size, size_t capacity, LESS_THAN_FUNC order_function)
+ordered_set_t create_ordered_set(size_t capacity, size_t element_size, LESS_THAN_FUNC order_function)
 {
     ordered_set_t out;
 
@@ -34,7 +34,7 @@ void reserve_ordered_set(ordered_set_t* set, size_t new_capacity)
     }
 }
 
-void reuse_ordered_set(ordered_set_t* set, size_t element_size, size_t capacity, LESS_THAN_FUNC order_function)
+void reuse_ordered_set(ordered_set_t* set, size_t capacity, size_t element_size, LESS_THAN_FUNC order_function)
 {
     if (element_size * capacity > set->capacity_ * set->element_size_)
         set->data_ = realloc(set->data_, element_size * capacity);

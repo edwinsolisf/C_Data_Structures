@@ -25,13 +25,6 @@ void destroy_astack(array_stack_t* stack)
     stack->data_ = NULL;
 }
 
-void resize_astack(array_stack_t* stack, size_t size)
-{
-    if (size > stack->size_)
-        reserve_astack(stack, next_capacity_astack(stack->capacity_));
-    stack->size_ = size;
-}
-
 void reuse_astack(array_stack_t* stack, size_t capacity, size_t element_size)
 {
     if (capacity * element_size > stack->capacity_ * stack->element_size_)
@@ -65,6 +58,13 @@ void* get_element_astack(const array_stack_t* stack, size_t index)
 void set_element_astack(array_stack_t* stack, size_t index, const void* data)
 {
     memcpy(get_element_astack(stack, index), data, stack->element_size_);
+}
+
+const void* top_astack(const array_stack_t* stack)
+{
+    if (stack->size_ != 0)
+        return get_element_astack(stack, stack->size_ - 1);
+    return NULL;
 }
 
 void push_astack(array_stack_t* stack, const void* data)

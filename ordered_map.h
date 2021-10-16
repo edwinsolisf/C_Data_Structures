@@ -1,5 +1,5 @@
-#ifndef DATA_ORDERED_MAP
-#define DATA_ORDERED_MAP
+#ifndef DATA_ORDERED_MAP_H
+#define DATA_ORDERED_MAP_H
 
 #include <stdlib.h>
 
@@ -86,7 +86,7 @@ size_t next_capacity_ordered_map(size_t capacity);
 /**
  * @brief Gets the address of the value with the given key in the map
  * 
- * @param map the ordered_set from which the element is retrieved
+ * @param map the ordered_map from which the element is retrieved
  * @param key the key of the element to be retrieved
  * @return pointer to the data
  */
@@ -136,7 +136,7 @@ const void* find_ordered_map(const ordered_map_t* map, const void* key);
  * @param index the index of the key
  * @return const pointer to the key position
  */
-const void* get_key_index_ordered_map(const ordered_map_t* map, size_t index);
+const void* get_key_ordered_map(const ordered_map_t* map, size_t index);
 
 /**
  * @brief Removes the given element from the ordered_map

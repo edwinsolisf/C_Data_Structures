@@ -1,7 +1,6 @@
 #include "ordered_map.h"
 
 #include <string.h>
-#include <stdio.h>
 
 ordered_map_t create_ordered_map(size_t key_size, size_t value_size, size_t capacity, LESS_THAN_FUNC order_function)
 {
@@ -48,7 +47,7 @@ void reuse_ordered_map(ordered_map_t* map, size_t key_size, size_t value_size, s
     map->order_func_ = order_function;
 }
 
-size_t next_capacity_ordered_set(size_t capacity)
+size_t next_capacity_ordered_map(size_t capacity)
 {
     return capacity ? capacity * 2 : 2;
 }
@@ -87,7 +86,7 @@ const void* find_ordered_map(const ordered_map_t* map, const void* key)
     return NULL;
 }
 
-const void* get_key_index_ordered_map(const ordered_map_t* map, size_t index)
+const void* get_key_ordered_map(const ordered_map_t* map, size_t index)
 {
     if (index < map->size_)
         return map->data_ + (map->key_size_ + map->value_size_) * index;
@@ -108,7 +107,7 @@ void remove_pair_ordered_map(ordered_map_t* map, const void* key)
 void insert_pair_ordered_map(ordered_map_t* map, const void* key, const void* value)
 {
     if (map->size_ == map->capacity_)
-        reserve_ordered_map(map, next_capacity_ordered_set(map->capacity_));
+        reserve_ordered_map(map, next_capacity_ordered_map(map->capacity_));
 
     if (map->size_ == 0)
     {

@@ -3,14 +3,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-array_list_t create_array_list(size_t reserve_size, size_t element_size)
+array_list_t create_array_list(size_t capacity, size_t element_size)
 {
     array_list_t out;
 
-    out.capacity_ = reserve_size;
+    out.capacity_ = capacity;
     out.size_ = 0;
     out.element_size_ = element_size;
-    out.data_ = malloc(element_size * reserve_size);
+    out.data_ = malloc(element_size * capacity);
 
     return out;
 }
@@ -35,6 +35,16 @@ void reuse_array_list(array_list_t* list, size_t capacity, size_t element_size)
         list->capacity_ = (list->capacity_ * list->element_size_) / element_size;
     list->element_size_ = element_size;
     list->size_ = 0;
+}
+
+void resize_array_list(array_list_t* list, size_t new_size)
+{
+    if (new_size > list->capacity_)
+        reserve_array_list(list, next_array_list_capacity(list->capacity_));
+    // else if (new_size > list->size_)
+    //     memset(list->data_ + list->size_ * list->element_size_, 0, (new_size - list->size_) * list->element_size_);
+
+    list->size_ = new_size;
 }
 
 void swap_array_list(array_list_t* left, array_list_t* right)
@@ -147,6 +157,12 @@ void mem_copy_array_list(array_list_t* list, const void* src, size_t count)
         reserve_array_list(list, next_array_list_capacity(list->capacity_));
     memcpy(list->data_, src, count * list->element_size_);
     if (count > list->size_) list->size_ = count;
+}
+
+void fill_array_list(array_list_t* list, const void* element)
+{
+    for (size_t i = 0; i < list->size_; ++i)
+        set_element_array_list(list, i, element);
 }
 
 void* get_element_array_list(const array_list_t* list, size_t index)

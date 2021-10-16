@@ -1,5 +1,5 @@
-#ifndef DATA_SET_H
-#define DATA_SET_H
+#ifndef DATA_ORDERED_SET_H
+#define DATA_ORDERED_SET_H
 
 /**
  * @file set.h
@@ -37,12 +37,12 @@ typedef struct data_ordered_set_st
 /**
  * @brief Create an ordered set with the given parameters
  * 
- * @param element_size size in bytes of the data types to be stored
  * @param capacity initial capacity that the set should be able to store
+ * @param element_size size in bytes of the data types to be stored
  * @param order_function function pointer to the comparison function for the type
  * @return ordered_set 
  */
-ordered_set_t create_ordered_set(size_t element_size, size_t capacity, LESS_THAN_FUNC order_function);
+ordered_set_t create_ordered_set(size_t capacity, size_t element_size, LESS_THAN_FUNC order_function);
 
 /**
  * @brief Destroy the instance ordered_set passed.
@@ -64,11 +64,11 @@ void reserve_ordered_set(ordered_set_t* set, size_t new_capacity);
  * @brief Reuses a previously created ordered_set and resets its parameters
  * 
  * @param set ordered_set to be repurposed
- * @param element_size the size in bytes of the new data type
  * @param capacity the new desired capacity of the buffer
+ * @param element_size the size in bytes of the new data type
  * @param order_function the new comparison function for the set
  */
-void reuse_ordered_set(ordered_set_t* set, size_t element_size, size_t capacity, LESS_THAN_FUNC order_function);
+void reuse_ordered_set(ordered_set_t* set, size_t capacity, size_t element_size, LESS_THAN_FUNC order_function);
 
 /**
  * @brief Returns the next capacity for a resized buffer from a previous known capacity
