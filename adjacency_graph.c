@@ -78,7 +78,7 @@ uint32_t get_node_id_adj(adjacency_graph_t* graph, const void* node)
 
 void* get_node_adj_graph(const adjacency_graph_t* graph, uint32_t id)
 {
-    return get_edgelist_adj_graph(graph, id) + sizeof(ordered_map_t);
+    return (void*)get_edgelist_adj_graph(graph, id) + sizeof(ordered_map_t);
 }
 
 void set_node_adj_graph(adjacency_graph_t* graph, uint32_t id, const void* data)
@@ -98,7 +98,7 @@ uint32_t add_node_adj_graph(adjacency_graph_t* graph, const void* node_data)
 
     ordered_map_t* edge_list = get_edgelist_adj_graph(graph, graph->nodes_);
     *edge_list = create_ordered_map(sizeof(uint32_t), graph->edge_element_size_, edgelist_capacity_adj(graph->nodes_), index_compare_func);
-    memcpy(edge_list + sizeof(ordered_map_t), node_data, graph->node_element_size_);
+    memcpy((void*)edge_list + sizeof(ordered_map_t), node_data, graph->node_element_size_);
 
     return graph->nodes_++;
 }
@@ -121,7 +121,7 @@ static size_t great_bit(size_t val)
 
 size_t edgelist_capacity_adj(size_t nodes)
 {
-    return nodes < BASE_CAPACITY ? nodes : (BASE_CAPACITY + great_bit(nodes - BASE_CAPACITY));
+    return nodes < BASE_CAPACITY ? BASE_CAPACITY : (BASE_CAPACITY + great_bit(nodes - BASE_CAPACITY));
 }
 
 void extract_node_adj_graph(adjacency_graph_t* graph, uint32_t id, void* data)
@@ -258,7 +258,17 @@ uint32_t search_node_adj_graph(const adjacency_graph_t* graph, SEARCH_PREDICATE_
         if (is_valid_node_adj(graph, i) && predicate(get_node_adj_graph(graph, i)))
             return i;
     }
-    return UINT32_MAX;
+    return INVALID_ADJGRAPH_NODE;
+}
+
+uint32_t find_node_adj_graph(const adjacency_graph_t* graph, const void* node_data, EQUALS_FUNC func)
+{
+    for (size_t i = 0; i < graph->nodes_; ++i)
+    {
+        if (is_valid_node_adj(graph, i) && func(node_data, get_node_adj_graph(graph, i)))
+            return i;
+    }
+    return INVALID_ADJGRAPH_NODE;
 }
 
 int is_connected_to_adj(const adjacency_graph_t* graph, uint32_t source, uint32_t destination)

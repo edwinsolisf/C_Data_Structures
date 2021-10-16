@@ -330,9 +330,18 @@ typedef int (*SEARCH_PREDICATE_FUNC)(const void* node_data);
  * 
  * @param graph graph where the node will be search
  * @param predicate pointer to the function evaluating the search condition
- * @return uint32_t 
+ * @return uint32_t id of the found node
  */
 uint32_t search_node_adj_graph(const adjacency_graph_t* graph, SEARCH_PREDICATE_FUNC predicate);
+
+/**
+ * @brief Finds the first node (in id order) in the graph that equals the given node
+ *        If no satisfying node is found, the function returns INVALID_ADJGRAPH_NODE
+ * @param graph graph where the node will be search
+ * @param func pointer to the data equality function
+ * @return uint32_t id of the found node
+ */
+uint32_t find_node_adj_graph(const adjacency_graph_t* graph, const void* node_data, EQUALS_FUNC func);
 
 /**
  * @brief Returns if there is an edge between the two nodes.
